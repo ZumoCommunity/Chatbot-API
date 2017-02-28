@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "botbuilder": "^3.7.0",
+    "restify": "^4.3.0"
+  },
+  "name": "chat-bot",
+  "description": "bot for zumo community",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ZumoCommunity/Chatbot-API.git"
+  },
+  "keywords": [
+    "chatbot",
+    "chat",
+    "bot"
+  ],
+  "author": "vakulchyk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ZumoCommunity/Chatbot-API/issues"
+  },
+  "homepage": "https://github.com/ZumoCommunity/Chatbot-API#readme"
+}
