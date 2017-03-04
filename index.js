@@ -33,4 +33,4 @@ var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
     console.log('%s listening at %s', server.name, server.url);
 });
-server.post('/api/messages', connector.listen());
+server.post('/api/git a', connector.listen());
