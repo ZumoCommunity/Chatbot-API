@@ -1,21 +1,21 @@
 var builder = require('botbuilder');
 var restify = require('restify');
 
-var dotenv = require('dotenv');
-dotenv.load();
+// var dotenv = require('dotenv');
+// dotenv.load();
 
-var appId = process.env.MICROSOFT_APP_ID;
-var appPassword = process.env.MICROSOFT_APP_PASSWORD;
+// var appId = process.env.MICROSOFT_APP_ID;
+// var appPassword = process.env.MICROSOFT_APP_PASSWORD;
 
-console.log(appId);
-console.log(appPassword);
+// console.log(appId);
+// console.log(appPassword);
 
-var connector = new builder.ChatConnector({
-    appId: appId,
-    appPassword: appPassword
-});
+// var connector = new builder.ChatConnector({
+//     appId: appId,
+//     appPassword: appPassword
+// });
 
-// var connector = new builder.ChatConnector();
+var connector = new builder.ChatConnector();
 
 var bot = new builder.UniversalBot(connector);
 
@@ -33,4 +33,4 @@ var server = restify.createServer();
 server.listen(process.env.port || process.env.PORT || 3978, function () {
     console.log('%s listening at %s', server.name, server.url);
 });
-server.post('/api/git a', connector.listen());
+server.post('/api/messages', connector.listen());
