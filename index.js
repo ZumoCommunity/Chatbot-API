@@ -4,10 +4,18 @@ var restify = require('restify');
 var dotenv = require('dotenv');
 dotenv.load();
 
+var appId = process.env.MICROSOFT_APP_ID;
+var appPassword = process.env.MICROSOFT_APP_PASSWORD;
+
+console.log(appId);
+console.log(appPassword);
+
 var connector = new builder.ChatConnector({
-    appId: process.env.MICROSOFT_APP_ID,
-    appPassword: process.env.MICROSOFT_APP_PASSWORD
+    appId: appId,
+    appPassword: appPassword
 });
+
+// var connector = new builder.ChatConnector();
 
 var bot = new builder.UniversalBot(connector);
 
