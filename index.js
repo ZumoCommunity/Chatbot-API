@@ -15,43 +15,33 @@ var connector = new builder.ChatConnector({
     appId: process.env.MICROSOFT_APP_ID,
     appPassword: process.env.MICROSOFT_APP_PASSWORD
 });
-
-
 var bot = new builder.UniversalBot(connector);
-
-// send simple notification
-function sendProactiveMessage(address) {
-  var msg = new builder.Message().address(address);
-  msg.text('Hello, this is a notification');
-  msg.textLocale('en-US');
-  bot.send(msg);
-}
-
-var savedAddress;
 server.post('/api/messages', connector.listen());
 
-// Do GET this endpoint to delivey a notification
-server.get('/api/CustomWebApi', (req, res, next) => {
-    sendProactiveMessage(savedAddress);
-    res.send('triggered');
-    next();
-  }
-);
+//=========================================================
+// Bots Dialogs
+//=========================================================
 
-// root dialog
-bot.dialog('/', function(session, args) {
+bot.dialog('/', [
+    function (session, args, next) {
+        if (!session.userData.name) {
+            session.beginDialog('/profile');
+        } else {
+            next();
+        }
+    },
+    function (session, results) {
+        session.send('Hello %s!', session.userData.name);
+    }
+]);
 
-  savedAddress = session.message.address;
-  console.log("here is saved address of this session" + savedAddress);
+bot.dialog('/profile', [
+    function (session) {
+        builder.Prompts.text(session, 'Hi! What is there?');
+    },
+    function (session, results) {
+        session.userData.name = results.response;
+        session.endDialog();
+    }
+]);
 
-  var message = 'Hello! In a few seconds I\'ll send you a message proactively to demonstrate how bots can initiate messages.';
-  session.send(message);
-  
-  message = 'You can also make me send a message by accessing: ';
-  message += 'http://localhost:' + server.address().port + '/api/CustomWebApi';
-  session.send(message);
-
-  setTimeout(() => {
-   sendProactiveMessage(savedAddress);
-  }, 50000);
-});
