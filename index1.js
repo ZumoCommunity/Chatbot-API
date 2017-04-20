@@ -53,5 +53,5 @@ bot.dialog('/', function(session, args) {
 
   setTimeout(() => {
    sendProactiveMessage(savedAddress);
-  }, 50000);
+  }, 5000);
 });
